@@ -32,9 +32,6 @@
                         <state key="selected" title="❤">
                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
-                        <connections>
-                            <action selector="addFavourtiesTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="uEw-Fz-WyD"/>
-                        </connections>
                     </button>
                 </subviews>
             </view>

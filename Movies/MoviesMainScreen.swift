@@ -13,6 +13,9 @@ class MoviesMainScreen: UIViewController {
     //MARK: outlets
     @IBOutlet weak var movieList: UITableView!
     
+    var favItem = [[IndexPath]]()
+    var collapsedIndex : [IndexPath] = []
+    
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +25,8 @@ class MoviesMainScreen: UIViewController {
         
         
         //registering nib for cell of movieList
-        let nib = UINib(nibName: "GenreCell", bundle: nil)
-        movieList.register(nib, forCellReuseIdentifier: "GenreCellID")
+        let nibCell = UINib(nibName: "GenreCell", bundle: nil)
+        movieList.register(nibCell, forCellReuseIdentifier: "GenreCellID")
         
         //registering nib for header of movieList
         let sectionNib = UINib(nibName: "SectionHeader", bundle: nil)
@@ -41,22 +44,15 @@ extension MoviesMainScreen: UITableViewDelegate, UITableViewDataSource{
     
     //returns number of section in movieList
     func numberOfSections(in tableView: UITableView) -> Int{
-        return 5
+        return MovieDataDictionary.movieDictionary.count
     }
     
     //formatting header for section
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let sectionTitle = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SectionHeaderID") as?SectionHeader else{ fatalError("Cell Not Found") }
+        guard let sectionTitle = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SectionHeaderID") as?SectionHeader else{ fatalError("Section Not Found") }
         
-        switch  section {
-        case 0: sectionTitle.categoryTitle.text = "BOLLYWOOD"
-        case 1: sectionTitle.categoryTitle.text = "HOLLYWOOD"
-        case 2: sectionTitle.categoryTitle.text = "LOLLYWOOD"
-        case 3: sectionTitle.categoryTitle.text = "TOLLYWOOD"
-            
-        default:  sectionTitle.categoryTitle.text = "BOLLYWOOD"
-        }
+        sectionTitle.categoryTitle.text = MovieDataDictionary.movieDictionary[section]["category"] as? String
         
         sectionTitle.categoryTitle.backgroundColor = UIColor.lightGray
         sectionTitle.categoryTitle.textColor = .white
@@ -71,13 +67,43 @@ extension MoviesMainScreen: UITableViewDelegate, UITableViewDataSource{
     
     //return number of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 4
+        
+        let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
+        
+        return movieGenre!.count
     }
     
     //formating rows of movieList
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let genreCell = tableView.dequeueReusableCell(withIdentifier: "GenreCellID", for: indexPath)
+        guard let genreCell = tableView.dequeueReusableCell(withIdentifier: "GenreCellID", for: indexPath) as? GenreCell else{ fatalError("Cell Not Found") }
+        
+        if collapsedIndex.contains(indexPath){
+            genreCell.expandCell.isSelected = true
+        }        
+        genreCell.expandCell.addTarget(self, action: #selector(expandCellRequested), for: .touchUpInside)
+        
+        
+        let movieGenre = MovieDataDictionary.movieDictionary[indexPath.section]["movieGenre"] as? [[String:Any]]
+        
+        genreCell.configureWithData(data: movieGenre!, indexPath: indexPath)
+        
+        
+        genreCell.movieCollection.dataSource = self
+        genreCell.movieCollection.delegate = self
+        
+        //registering nib for item of GenreCell
+        let nibItem = UINib(nibName: "ContentCell", bundle: nil)
+        genreCell.movieCollection.register(nibItem, forCellWithReuseIdentifier: "ContentCellID")
+        
+        
+        //formatting items of movieCollection
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 115, height: 115)
+        flowLayout.minimumInteritemSpacing = 1
+        flowLayout.scrollDirection = .horizontal
+        genreCell.movieCollection.collectionViewLayout = flowLayout
+        
         
         return genreCell
         
@@ -86,7 +112,68 @@ extension MoviesMainScreen: UITableViewDelegate, UITableViewDataSource{
     //returns hieght of row for MovieList
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         
-        return 100
+        if (collapsedIndex.contains(indexPath)){
+            
+            return 30
+        }
+
+        else{
+        return 150
+        }
     }
     
 }
+
+
+extension MoviesMainScreen : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
+    
+    //returns number of items in movieCollection
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        
+//        let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
+        
+        
+        return 10
+    }
+    
+    //returns items of movieCollection
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        
+        
+        
+        guard let movieItem = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCellID", for: indexPath) as? ContentCell else{ fatalError("Item Not Found") }
+        
+        movieItem.backgroundColor = .random
+        
+        
+        movieItem.addFavourties.addTarget(self, action: #selector(addFavourtiesTapped), for: .touchUpInside)
+      
+        return movieItem
+    }
+    
+    //detailed view of selected cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let detailedImageViewPage = self.storyboard?.instantiateViewController(withIdentifier: "DetailedImageViewID") as! DetailedImageViewVC
+        UIView.animate(withDuration: 0.8, animations: {
+
+            UIView.setAnimationCurve(.easeInOut)
+            
+            self.navigationController?.pushViewController(detailedImageViewPage, animated: false)
+            
+            UIView.setAnimationTransition(.curlUp, for: self.navigationController!.view!, cache: false)
+
+        })
+            
+        
+//        self.navigationController?.pushViewController(detailedImageViewPage, animated: true)
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        detailedImageViewPage.imageColor = cell?.backgroundColor
+        
+        
+    }
+   
+        
+}
+

@@ -5,6 +5,8 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,24 +16,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htT-RC-7cD">
-                        <rect key="frame" x="0.0" y="2" width="320" height="15"/>
+                        <rect key="frame" x="0.0" y="2" width="320" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="wLW-AH-LXe"/>
+                            <constraint firstAttribute="height" constant="30" id="wLW-AH-LXe"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.8783307671546936" green="0.97162193059921265" blue="0.96103793382644653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5k0-LF-IXx">
-                        <rect key="frame" x="0.0" y="15" width="320" height="80"/>
+                        <rect key="frame" x="0.0" y="32" width="320" height="11.5"/>
                         <color key="backgroundColor" red="0.73241657018661499" green="0.39807477593421936" blue="0.082533054053783417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="80" id="hD7-qL-liD"/>
-                        </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jG6-Fe-xXr">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -40,29 +39,51 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Ty-0B-b9C">
-                        <rect key="frame" x="0.0" y="95" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="43.5" width="320" height="1"/>
                         <color key="backgroundColor" red="0.037810850888490677" green="0.044066809117794037" blue="0.10858117789030075" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="rOr-Ql-yxJ"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORG-5F-i6h">
+                        <rect key="frame" x="278" y="2" width="30" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ORG-5F-i6h" secondAttribute="height" multiplier="1:1" id="IEe-ul-TGj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="&lt;">
+                            <color key="titleColor" red="0.9235692024230957" green="0.8146471381187439" blue="0.57240027189254761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" title="&gt;">
+                            <color key="titleColor" red="0.9235692024230957" green="0.8146471381187439" blue="0.57240027189254761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.46303975582122803" green="0.083249323070049286" blue="0.21671637892723083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="5k0-LF-IXx" firstAttribute="centerX" secondItem="htT-RC-7cD" secondAttribute="centerX" id="EeK-xy-8Q4"/>
                     <constraint firstItem="htT-RC-7cD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="FZt-uF-9iO"/>
                     <constraint firstItem="htT-RC-7cD" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="FgG-lo-Ihl"/>
                     <constraint firstItem="9Ty-0B-b9C" firstAttribute="centerX" secondItem="5k0-LF-IXx" secondAttribute="centerX" id="NUe-AC-K6c"/>
                     <constraint firstItem="htT-RC-7cD" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="TZ0-dh-nzX"/>
-                    <constraint firstItem="htT-RC-7cD" firstAttribute="bottom" secondItem="5k0-LF-IXx" secondAttribute="top" constant="2" id="UJA-Z0-p3e"/>
+                    <constraint firstAttribute="bottom" secondItem="5k0-LF-IXx" secondAttribute="bottom" id="WeN-se-Y6o"/>
                     <constraint firstItem="9Ty-0B-b9C" firstAttribute="top" secondItem="5k0-LF-IXx" secondAttribute="bottom" id="YjY-by-VR9"/>
-                    <constraint firstItem="5k0-LF-IXx" firstAttribute="width" secondItem="htT-RC-7cD" secondAttribute="width" id="pGw-YV-6ns"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ORG-5F-i6h" secondAttribute="trailing" constant="4" id="aDN-xI-wpM"/>
+                    <constraint firstItem="ORG-5F-i6h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="e4L-DI-U0k"/>
+                    <constraint firstItem="5k0-LF-IXx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="eRF-az-WXq"/>
+                    <constraint firstItem="5k0-LF-IXx" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="etK-dX-xm1"/>
+                    <constraint firstItem="5k0-LF-IXx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qYz-pS-4sv"/>
                     <constraint firstItem="9Ty-0B-b9C" firstAttribute="width" secondItem="5k0-LF-IXx" secondAttribute="width" id="rMC-Lk-R4w"/>
+                    <constraint firstItem="ORG-5F-i6h" firstAttribute="height" secondItem="htT-RC-7cD" secondAttribute="height" id="sMR-KK-XyQ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="expandCell" destination="ORG-5F-i6h" id="XfQ-rQ-fSi"/>
                 <outlet property="genreLabel" destination="htT-RC-7cD" id="Z9g-0W-ozP"/>
-                <outlet property="movieCollection" destination="5k0-LF-IXx" id="op8-aY-6SB"/>
+                <outlet property="movieCollection" destination="5k0-LF-IXx" id="qCx-9O-QyH"/>
             </connections>
         </tableViewCell>
     </objects>

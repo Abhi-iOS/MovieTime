@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C8431741E57027800592004 /* DetailedImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8431731E57027800592004 /* DetailedImageViewVC.swift */; };
 		0C971F331E55822700E22F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C971F321E55822700E22F42 /* AppDelegate.swift */; };
 		0C971F381E55822700E22F42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F361E55822700E22F42 /* Main.storyboard */; };
 		0C971F3A1E55822700E22F42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F391E55822700E22F42 /* Assets.xcassets */; };
@@ -18,9 +19,12 @@
 		0C971F4D1E5585B100E22F42 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F4B1E5585B100E22F42 /* ContentCell.xib */; };
 		0C971F511E55867A00E22F42 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C971F501E55867A00E22F42 /* SectionHeader.swift */; };
 		0C971F531E559E1200E22F42 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F521E559E1200E22F42 /* SectionHeader.xib */; };
+		0C971F571E55C0B100E22F42 /* DataContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C971F561E55C0B100E22F42 /* DataContent.swift */; };
+		0CF9C2271E58095700AF5DCC /* UsableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9C2261E58095700AF5DCC /* UsableExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C8431731E57027800592004 /* DetailedImageViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedImageViewVC.swift; sourceTree = "<group>"; };
 		0C971F2F1E55822700E22F42 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C971F321E55822700E22F42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C971F371E55822700E22F42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,6 +38,8 @@
 		0C971F4B1E5585B100E22F42 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		0C971F501E55867A00E22F42 /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		0C971F521E559E1200E22F42 /* SectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
+		0C971F561E55C0B100E22F42 /* DataContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContent.swift; sourceTree = "<group>"; };
+		0CF9C2261E58095700AF5DCC /* UsableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsableExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +73,10 @@
 			isa = PBXGroup;
 			children = (
 				0C971F321E55822700E22F42 /* AppDelegate.swift */,
+				0C971F561E55C0B100E22F42 /* DataContent.swift */,
+				0CF9C2261E58095700AF5DCC /* UsableExtensions.swift */,
 				0C971F441E55846300E22F42 /* MoviesMainScreen.swift */,
+				0C8431731E57027800592004 /* DetailedImageViewVC.swift */,
 				0C971F461E5584DE00E22F42 /* GenreCell.swift */,
 				0C971F4A1E5585B100E22F42 /* ContentCell.swift */,
 				0C971F501E55867A00E22F42 /* SectionHeader.swift */,
@@ -162,6 +171,9 @@
 				0C971F511E55867A00E22F42 /* SectionHeader.swift in Sources */,
 				0C971F481E5584DE00E22F42 /* GenreCell.swift in Sources */,
 				0C971F4C1E5585B100E22F42 /* ContentCell.swift in Sources */,
+				0C8431741E57027800592004 /* DetailedImageViewVC.swift in Sources */,
+				0CF9C2271E58095700AF5DCC /* UsableExtensions.swift in Sources */,
+				0C971F571E55C0B100E22F42 /* DataContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +335,7 @@
 				0C971F431E55822700E22F42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -18,9 +18,14 @@ class ContentCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
-    @IBAction func addFavourtiesTapped(_ sender: UIButton) {
+    
+    override func prepareForReuse() {
         
-        addFavourties.isSelected = !addFavourties.isSelected
+        super.prepareForReuse()
+//        addFavourties.isSelected = false
+        
+        
     }
+
+    
 }

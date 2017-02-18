@@ -5,6 +5,8 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,7 +35,11 @@
                             <constraint firstItem="V12-ck-2Ml" firstAttribute="leading" secondItem="3Pr-UY-41Y" secondAttribute="leading" id="y7E-zz-igD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="MOVIE TIME" id="HiU-XL-bmO"/>
+                    <navigationItem key="navigationItem" title="MOVIE TIME" id="HiU-XL-bmO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="bJO-1O-bHI">
+                            <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="movieList" destination="V12-ck-2Ml" id="WCV-7f-LvN"/>
                     </connections>
@@ -42,12 +48,59 @@
             </objects>
             <point key="canvasLocation" x="1488.8" y="-492.50374812593708"/>
         </scene>
+        <!--Detailed Image ViewVC-->
+        <scene sceneID="Xyy-Hl-sRt">
+            <objects>
+                <viewController storyboardIdentifier="DetailedImageViewID" id="eqp-d5-N6W" customClass="DetailedImageViewVC" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HlT-gt-sYc"/>
+                        <viewControllerLayoutGuide type="bottom" id="9jG-Oj-POi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rfN-bn-jDL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JeW-FG-9Zp">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JeW-FG-9Zp" secondAttribute="height" id="Lto-0m-Fy5"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2F-ah-Xht">
+                                <rect key="frame" x="93.5" y="30" width="187.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="L2p-Ca-Ltg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <color key="textColor" red="0.096254445612430573" green="0.2175159752368927" blue="0.65207761526107788" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JeW-FG-9Zp" firstAttribute="centerY" secondItem="rfN-bn-jDL" secondAttribute="centerY" id="2OQ-ES-5B4"/>
+                            <constraint firstItem="JeW-FG-9Zp" firstAttribute="centerX" secondItem="rfN-bn-jDL" secondAttribute="centerX" id="2j2-b9-yUl"/>
+                            <constraint firstItem="v2F-ah-Xht" firstAttribute="width" secondItem="rfN-bn-jDL" secondAttribute="width" multiplier="1:2" id="cGI-Zd-zGp"/>
+                            <constraint firstItem="v2F-ah-Xht" firstAttribute="centerX" secondItem="rfN-bn-jDL" secondAttribute="centerX" id="h8t-MM-6Wy"/>
+                            <constraint firstItem="JeW-FG-9Zp" firstAttribute="width" secondItem="rfN-bn-jDL" secondAttribute="width" id="iVu-Gv-4z9"/>
+                            <constraint firstItem="v2F-ah-Xht" firstAttribute="top" secondItem="HlT-gt-sYc" secondAttribute="bottom" constant="10" id="rhh-nG-VDd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailedImage" destination="JeW-FG-9Zp" id="FSx-aD-7hd"/>
+                        <outlet property="imageLabel" destination="v2F-ah-Xht" id="ZSf-8z-55q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1oZ-2w-7cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2167" y="-493"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="25D-gn-Xpt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zAO-NV-y7s" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V2Q-RB-5g2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V2Q-RB-5g2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.51912343502044678" green="0.087499432265758514" blue="0.18164935708045959" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
