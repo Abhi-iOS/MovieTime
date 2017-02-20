@@ -7,4 +7,6 @@
 //
 
 import Foundation
-import S
+import Alamofire
+import AlamofireImage
+
