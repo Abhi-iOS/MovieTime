@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,6 +21,23 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltC-iX-BJU">
+                    <rect key="frame" x="342" y="22.5" width="25" height="25"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ltC-iX-BJU" secondAttribute="height" id="5Id-zQ-Tdc"/>
+                        <constraint firstAttribute="width" constant="25" id="Za4-pk-WgN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="-">
+                        <color key="titleColor" red="0.037810850888490677" green="0.044066809117794037" blue="0.10858117789030075" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <state key="selected" title="+">
+                        <color key="titleColor" red="0.037810850888490677" green="0.044066809117794037" blue="0.10858117789030075" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" identifier="SectionHeaderID"/>
@@ -28,10 +46,13 @@
                 <constraint firstItem="Uol-5H-NXA" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="L0Y-oW-9aG"/>
                 <constraint firstItem="Uol-5H-NXA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WgM-Rf-qXd"/>
                 <constraint firstItem="Uol-5H-NXA" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="foT-Qx-a7W"/>
+                <constraint firstItem="ltC-iX-BJU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nCb-Pz-OEw"/>
+                <constraint firstAttribute="trailing" secondItem="ltC-iX-BJU" secondAttribute="trailing" constant="8" id="waL-rZ-MHA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="categoryTitle" destination="Uol-5H-NXA" id="tdD-o8-G7d"/>
+                <outlet property="sectionContentCollapse" destination="ltC-iX-BJU" id="J3d-hN-RFY"/>
             </connections>
             <point key="canvasLocation" x="52.5" y="-96"/>
         </view>

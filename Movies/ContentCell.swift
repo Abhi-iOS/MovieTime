@@ -22,7 +22,7 @@ class ContentCell: UICollectionViewCell {
     override func prepareForReuse() {
         
         super.prepareForReuse()
-//        addFavourties.isSelected = false
+        addFavourties.isSelected = false
         
         
     }

@@ -16,6 +16,7 @@ class GenreCell: UITableViewCell {
     @IBOutlet weak var movieCollection: UICollectionView!
     
     @IBOutlet weak var expandCell: UIButton!
+    
     override func awakeFromNib() {
         
         //MARK: awakeFromNib

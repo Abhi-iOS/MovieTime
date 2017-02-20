@@ -12,7 +12,7 @@ import UIKit
 //Class that stores MovieData
 class MovieDataDictionary{
 
-    static let movieDictionary: [[String:Any]] = [
+    static var movieDictionary: [[String:Any]] = [
     
         ["category": "BOLLYWOOD",
          

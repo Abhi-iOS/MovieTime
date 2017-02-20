@@ -11,8 +11,9 @@ import UIKit
 class MoviesMainScreenVC: UIViewController {
 
     //MARK: variables
-    var favItems: [[IndexPath]] = [[]]
+    var favItems: [[IndexPath]] = []
     var collapsedIndices : [IndexPath] = []
+    var sectionsCollapsed: [Int] = []
     
     //MARK: outlets
     @IBOutlet weak var movieTable: UITableView!
@@ -27,12 +28,12 @@ class MoviesMainScreenVC: UIViewController {
         
         
         //registering nib for cell of movieTable
-        let nibCell = UINib(nibName: "GenreCell", bundle: nil)
-        movieTable.register(nibCell, forCellReuseIdentifier: "GenreCellID")
+        let tableCellNib = UINib(nibName: "GenreCell", bundle: nil)
+        movieTable.register(tableCellNib, forCellReuseIdentifier: "GenreCellID")
         
         //registering nib for header of movieTable
-        let sectionNib = UINib(nibName: "SectionHeader", bundle: nil)
-        movieTable.register(sectionNib, forHeaderFooterViewReuseIdentifier: "SectionHeaderID")
+        let sectionHeaderNib = UINib(nibName: "SectionHeader", bundle: nil)
+        movieTable.register(sectionHeaderNib, forHeaderFooterViewReuseIdentifier: "SectionHeaderID")
         
         movieTable.dataSource = self
         movieTable.delegate = self
@@ -52,14 +53,22 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
     //formatting header for section
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let sectionTitle = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SectionHeaderID") as?SectionHeader else{ fatalError("Section Not Found") }
+        guard let sectionHeaderTitle = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SectionHeaderID") as?SectionHeader else{ fatalError("Section Not Found") }
         
-        sectionTitle.categoryTitle.text = MovieDataDictionary.movieDictionary[section]["category"] as? String
+        sectionHeaderTitle.categoryTitle.text = MovieDataDictionary.movieDictionary[section]["category"] as? String
         
-        sectionTitle.categoryTitle.backgroundColor = .lightGray
-        sectionTitle.categoryTitle.textColor = .white
+        sectionHeaderTitle.categoryTitle.backgroundColor = .lightGray
+        sectionHeaderTitle.categoryTitle.textColor = .white
         
-        return sectionTitle
+        sectionHeaderTitle.sectionContentCollapse.tag = section
+        
+        sectionHeaderTitle.sectionContentCollapse.addTarget(self, action: #selector(collapseContentOfSection), for: .touchUpInside)
+        
+        if sectionsCollapsed.contains(section){
+            sectionHeaderTitle.sectionContentCollapse.isSelected = true
+        }
+        
+        return sectionHeaderTitle
     }
     
     //return height of section
@@ -72,7 +81,13 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         
         let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
         
+        if sectionsCollapsed.contains(section){
+            
+            return 0
+        }else {
+        
         return movieGenre!.count
+        }
     }
     
     //formating rows of movieTable
@@ -95,8 +110,8 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         genreCell.movieCollection.delegate = self
         
         //registering nib for item of GenreCell
-        let nibItem = UINib(nibName: "ContentCell", bundle: nil)
-        genreCell.movieCollection.register(nibItem, forCellWithReuseIdentifier: "ContentCellID")
+        let contentCellNib = UINib(nibName: "ContentCell", bundle: nil)
+        genreCell.movieCollection.register(contentCellNib, forCellWithReuseIdentifier: "ContentCellID")
         
         
         //formatting items of movieCollection
@@ -117,10 +132,10 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         if (collapsedIndices.contains(indexPath)){
             
             return 30
-        }
-
-        else{
-        return 150
+        } else {
+        
+            return 150
+        
         }
     }
     
@@ -158,7 +173,11 @@ extension MoviesMainScreenVC : UICollectionViewDelegate, UICollectionViewDelegat
         
         let detailedImageViewPage = self.storyboard?.instantiateViewController(withIdentifier: "DetailedImageViewID") as! DetailedImageViewVC
         
-        UIView.animate(withDuration: 0.8, delay: 0.0, options: .curveLinear, animations: {self.navigationController?.pushViewController(detailedImageViewPage, animated: false)}, completion: nil)
+        UIView.animate(withDuration: 0.8, delay: 0.0, options: .curveEaseInOut, animations: {
+            
+            self.navigationController?.pushViewController(detailedImageViewPage, animated: false)
+            UIView.setAnimationTransition(.curlUp, for: (self.navigationController?.view)!, cache: false)
+        }, completion: nil)
         
         let cell = collectionView.cellForItem(at: indexPath)
         detailedImageViewPage.imageColor = cell?.backgroundColor
@@ -181,7 +200,7 @@ extension MoviesMainScreenVC{
         guard let collectionCell = favButton.getCollectionViewCell as! ContentCell? else{ return
         }
         
-        guard let tableCell = favButton.getTableViewCell as! GenreCell? else{ return
+        guard let tableCell = collectionCell.getTableViewCell as! GenreCell? else{ return
         }
 
         let tableCellIndices = movieTable.indexPath(for: tableCell)
@@ -197,35 +216,58 @@ extension MoviesMainScreenVC{
             
         else{
             
-            favItems.remove(at: favItems.index(where: { (indexPath: [IndexPath]) -> Bool in
-                return indexPath == favIndexPath})!)
+            favItems = favItems.filter({ (indices : [IndexPath]) -> Bool in
+                return indices != favIndexPath
+            })
+            
         }
         
         
-        print(favItems)
+       print(favItems)
     }
     
     //expanding the cell
     func expandCellRequested(expButton: UIButton){
         
-        guard let genreCell = expButton.getTableViewCell as! GenreCell? else{ return
+        guard let genreCell = expButton.getTableViewCell as? GenreCell else{ return
         }
         
         let indexs = self.movieTable.indexPath(for: genreCell)!
         
         expButton.isSelected = !expButton.isSelected
+        
         if expButton.isSelected{
             
             collapsedIndices.append(indexs)
             self.movieTable.reloadRows(at: [indexs], with: .fade)
             
-        }
-        else{
+        }else {
             
-            collapsedIndices.remove(at: collapsedIndices.index(of: indexs)!)
+            collapsedIndices = collapsedIndices.filter({ (indices : IndexPath) -> Bool in
+                return indices != indexs
+            })
+            
             self.movieTable.reloadRows(at: [indexs], with: .fade)
         }
         
+    }
+    
+    //collapsing contents of section
+    func collapseContentOfSection(collapseSection: UIButton){
+        
+        let sectionToCollapse = collapseSection.tag
+        
+        collapseSection.isSelected = !collapseSection.isSelected
+        
+        if collapseSection.isSelected{
+            sectionsCollapsed.append(sectionToCollapse)
+        }else {
+            
+            sectionsCollapsed = sectionsCollapsed.filter({ (section) -> Bool in
+                return section != sectionToCollapse
+            })
+        }
+        self.movieTable.reloadSections([sectionToCollapse], with: .fade)
     }
     
 }

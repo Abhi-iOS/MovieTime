@@ -12,6 +12,7 @@ class DetailedImageViewVC: UIViewController {
     
     //MARK: variables
     var imageColor: UIColor!
+    var nextPoint: CGPoint = CGPoint(x: 0, y: 0)
     
     //MARK: outlets
     @IBOutlet weak var detailedImage: UIImageView!
@@ -24,6 +25,10 @@ class DetailedImageViewVC: UIViewController {
         
         detailedImage.backgroundColor = imageColor
         
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(translateImage))
+        self.detailedImage.addGestureRecognizer(pan)
+        //detailedImage.isUserInteractionEnabled = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,12 +40,26 @@ class DetailedImageViewVC: UIViewController {
         
         super.viewWillDisappear(false)
         
-        UIView.animate(withDuration: 0.8, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.setAnimationTransition(.curlDown, for: self.navigationController!.view!, cache: false)
+        }, completion: nil)
+        
+    }
+    
+    //translate image on pan
+    func translateImage(gesture: UIPanGestureRecognizer){
+        
+        nextPoint = gesture.translation(in: detailedImage)
+        
+        switch gesture.state {
+        case .began: print("gesture begins")
             
-            UIView.setAnimationCurve(.easeInOut)
-            UIView.setAnimationTransition(.curlDown, for: self.navigationController!.view!, cache: false)
+        case .changed: detailedImage.transform = CGAffineTransform(translationX: nextPoint.x, y: nextPoint.y)
             
-        })
+        case .ended:   print("gesture ended")
+            
+        default: print("default")
+        }
         
     }
     

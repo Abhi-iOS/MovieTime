@@ -13,7 +13,12 @@ class SectionHeader: UITableViewHeaderFooterView {
     //MARK: outlets
     @IBOutlet weak var categoryTitle: UILabel!
     
+    @IBOutlet weak var sectionContentCollapse: UIButton!
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        sectionContentCollapse.isSelected = false
+    }
     
 }

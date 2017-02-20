@@ -17,7 +17,9 @@ extension UIView{
         var subview = self
         
         while !(subview is UICollectionViewCell){
-            subview = subview.superview!
+            
+            guard let view = subview.superview else { return nil}
+            subview = view
         }
         
         return subview as? UICollectionViewCell
@@ -28,7 +30,8 @@ extension UIView{
         var subview = self
         
         while !(subview is UITableViewCell){
-            subview = subview.superview!
+            guard let view = subview.superview else { return nil}
+            subview = view
         }
 
         return subview as? UITableViewCell

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C8431741E57027800592004 /* DetailedImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8431731E57027800592004 /* DetailedImageViewVC.swift */; };
+		0C92A7091E5B312000A472DE /* ImagesInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C92A7081E5B312000A472DE /* ImagesInfoData.swift */; };
 		0C971F331E55822700E22F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C971F321E55822700E22F42 /* AppDelegate.swift */; };
 		0C971F381E55822700E22F42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F361E55822700E22F42 /* Main.storyboard */; };
 		0C971F3A1E55822700E22F42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F391E55822700E22F42 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		0C8431731E57027800592004 /* DetailedImageViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedImageViewVC.swift; sourceTree = "<group>"; };
+		0C92A7081E5B312000A472DE /* ImagesInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInfoData.swift; sourceTree = "<group>"; };
 		0C971F2F1E55822700E22F42 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C971F321E55822700E22F42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C971F371E55822700E22F42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				0C971F321E55822700E22F42 /* AppDelegate.swift */,
 				0C971F561E55C0B100E22F42 /* DataContent.swift */,
+				0C92A7081E5B312000A472DE /* ImagesInfoData.swift */,
 				0CF9C2261E58095700AF5DCC /* ReusableExtensions.swift */,
 				0C971F441E55846300E22F42 /* MoviesMainScreenVC.swift */,
 				0C8431731E57027800592004 /* DetailedImageViewVC.swift */,
@@ -171,6 +174,7 @@
 				0C971F511E55867A00E22F42 /* SectionHeader.swift in Sources */,
 				0C971F481E5584DE00E22F42 /* GenreCell.swift in Sources */,
 				0C971F4C1E5585B100E22F42 /* ContentCell.swift in Sources */,
+				0C92A7091E5B312000A472DE /* ImagesInfoData.swift in Sources */,
 				0C8431741E57027800592004 /* DetailedImageViewVC.swift in Sources */,
 				0CF9C2271E58095700AF5DCC /* ReusableExtensions.swift in Sources */,
 				0C971F571E55C0B100E22F42 /* DataContent.swift in Sources */,
