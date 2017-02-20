@@ -97,17 +97,18 @@ extension MoviesMainScreen{
         
         let genreCell = UIView.getSuperView(subview: expButton, superview: .UITableViewCell) as! GenreCell
         let indexs = self.movieList.indexPath(for: genreCell)!
+        
         expButton.isSelected = !expButton.isSelected
         if expButton.isSelected{
+           
             collapsedIndex.append(indexs)
-            self.movieList.beginUpdates()
-            self.movieList.endUpdates()
+            self.movieList.reloadRows(at: [indexs], with: .fade)
             
         }
         else{
+           
             collapsedIndex.remove(at: collapsedIndex.index(of: indexs)!)
-            self.movieList.beginUpdates()
-            self.movieList.endUpdates()
+            self.movieList.reloadRows(at: [indexs], with: .fade)
         }
         
     }

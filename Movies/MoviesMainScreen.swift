@@ -10,13 +10,15 @@ import UIKit
 
 class MoviesMainScreen: UIViewController {
 
-    //MARK: outlets
-    @IBOutlet weak var movieList: UITableView!
-    
+    //MARK: variables
     var favItem = [[IndexPath]]()
     var collapsedIndex : [IndexPath] = []
     
-    //MARK: viewDidLoad
+    //MARK: outlets
+    @IBOutlet weak var movieList: UITableView!
+    
+    
+    //MARK: View life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -124,13 +126,13 @@ extension MoviesMainScreen: UITableViewDelegate, UITableViewDataSource{
     
 }
 
-
+//MARK: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 extension MoviesMainScreen : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     //returns number of items in movieCollection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
-//        let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
+        //let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
         
         
         return 10

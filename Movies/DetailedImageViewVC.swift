@@ -10,10 +10,14 @@ import UIKit
 
 class DetailedImageViewVC: UIViewController {
     
+    //MARK: variables
     var imageColor: UIColor!
     
+    //MARK: outlets
     @IBOutlet weak var detailedImage: UIImageView!
     @IBOutlet weak var imageLabel: UILabel!
+    
+    //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
