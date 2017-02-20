@@ -13,7 +13,7 @@
         <!--MOVIE TIME-->
         <scene sceneID="Lmf-x8-Yc5">
             <objects>
-                <viewController id="Pks-lK-k5H" customClass="MoviesMainScreen" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Pks-lK-k5H" customClass="MoviesMainScreenVC" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qW7-d0-gXk"/>
                         <viewControllerLayoutGuide type="bottom" id="hGk-jc-Wz7"/>
@@ -41,7 +41,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="movieList" destination="V12-ck-2Ml" id="WCV-7f-LvN"/>
+                        <outlet property="movieTable" destination="V12-ck-2Ml" id="y0N-G7-wWN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDe-Yk-Lrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
