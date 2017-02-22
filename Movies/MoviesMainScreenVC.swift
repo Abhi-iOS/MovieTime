@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import Foundation
+import AlamofireImage
+
 
 class MoviesMainScreenVC: UIViewController {
 
     //MARK: variables
-    var favItems: [[IndexPath]] = []
-    var collapsedIndices : [IndexPath] = []
-    var sectionsCollapsed: [Int] = []
+    var collapsedIndices = [IndexPath]()
+    
+    var rowsData = ["cats","dogs","tiger", "horses"]
+    var contentCellData = [[[ImageInfo]]]()
+   
+    var sectionsCollapsed = [Int]()
+    
     
     //MARK: outlets
     @IBOutlet weak var movieTable: UITableView!
@@ -37,9 +44,32 @@ class MoviesMainScreenVC: UIViewController {
         
         movieTable.dataSource = self
         movieTable.delegate = self
+  
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        for section in 0...2{
+            self.contentCellData.append([])
+            for data in rowsData{
+                Webservices().fetchDataFromPixabay(withQuery: data,
+                                               success: { (images : [ImageInfo]) in
+                                                
+                                                print("service hit")
+                                                self.contentCellData[section].append(images)
+                                                self.movieTable.reloadData()
+                                                
+                }) { (error : Error) in
+                        print(error)
+                
+                }
+
+            }
+        }
         
     }
-   
+
 }
 
 //MARK: UITableViewDelegate, UITableViewDataSource
@@ -47,7 +77,7 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
     
     //returns number of section in movieTable
     func numberOfSections(in tableView: UITableView) -> Int{
-        return MovieDataDictionary.movieDictionary.count
+        return contentCellData.count
     }
     
     //formatting header for section
@@ -55,9 +85,8 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         
         guard let sectionHeaderTitle = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SectionHeaderID") as?SectionHeader else{ fatalError("Section Not Found") }
         
-        sectionHeaderTitle.categoryTitle.text = MovieDataDictionary.movieDictionary[section]["category"] as? String
         
-        sectionHeaderTitle.categoryTitle.backgroundColor = .lightGray
+//        sectionHeaderTitle.categoryTitle.backgroundColor = .blue
         sectionHeaderTitle.categoryTitle.textColor = .white
         
         sectionHeaderTitle.sectionContentCollapse.tag = section
@@ -79,15 +108,10 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
     //return number of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
-        let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
-        
         if sectionsCollapsed.contains(section){
-            
             return 0
-        }else {
-        
-        return movieGenre!.count
         }
+        return contentCellData[section].count
     }
     
     //formating rows of movieTable
@@ -97,14 +121,19 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         
         if collapsedIndices.contains(indexPath){
             genreCell.expandCell.isSelected = true
-        }        
+        }
+        
         genreCell.expandCell.addTarget(self, action: #selector(expandCellRequested), for: .touchUpInside)
         
+        return genreCell
+            
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let movieGenre = MovieDataDictionary.movieDictionary[indexPath.section]["movieGenre"] as? [[String:Any]]
+        guard let genreCell = cell as? GenreCell else{  return  }
         
-        genreCell.configureWithData(data: movieGenre!, indexPath: indexPath)
-        
+        genreCell.genreLabel.text = rowsData[indexPath.row]
         
         genreCell.movieCollection.dataSource = self
         genreCell.movieCollection.delegate = self
@@ -112,6 +141,12 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         //registering nib for item of GenreCell
         let contentCellNib = UINib(nibName: "ContentCell", bundle: nil)
         genreCell.movieCollection.register(contentCellNib, forCellWithReuseIdentifier: "ContentCellID")
+        
+        genreCell.tag = indexPath.section
+        genreCell.movieCollection.tag = indexPath.row
+        
+        movieTable.reloadData()
+        
         
         
         //formatting items of movieCollection
@@ -121,8 +156,8 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         flowLayout.scrollDirection = .horizontal
         genreCell.movieCollection.collectionViewLayout = flowLayout
         
+        genreCell.movieCollection.reloadData()
         
-        return genreCell
         
     }
     
@@ -132,11 +167,8 @@ extension MoviesMainScreenVC: UITableViewDelegate, UITableViewDataSource{
         if (collapsedIndices.contains(indexPath)){
             
             return 30
-        } else {
-        
-            return 150
-        
         }
+        return 150
     }
     
 }
@@ -147,25 +179,36 @@ extension MoviesMainScreenVC : UICollectionViewDelegate, UICollectionViewDelegat
     //returns number of items in movieCollection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
-        //let movieGenre = MovieDataDictionary.movieDictionary[section]["movieGenre"] as? [[String:Any]]
-        
-        
-        return 10
+        return contentCellData[section][collectionView.tag].count
     }
     
     //returns items of movieCollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
-        
-        
         guard let movieItem = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCellID", for: indexPath) as? ContentCell else{ fatalError("Item Not Found") }
-        
-        movieItem.backgroundColor = .random
-        
         
         movieItem.addFavourties.addTarget(self, action: #selector(addFavourtiesTapped), for: .touchUpInside)
       
         return movieItem
+    }
+    
+    //called when content cell is to be displayed
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let contentCell = cell as! ContentCell
+        
+        guard let genreCell = contentCell.getTableViewCell as? GenreCell else{ return
+        }
+        
+        let genreCellIndexPath = [genreCell.tag, genreCell.movieCollection.tag] as IndexPath
+        
+        let URl = URL(string: contentCellData[genreCellIndexPath.section][genreCellIndexPath.row][indexPath.row].previewURL)!
+        
+        contentCell.dataImage.af_setImage(withURL: URl)
+
+        
+        contentCell.imageLabel.text = "\(genreCellIndexPath.section).\(genreCellIndexPath.row).\(indexPath.row)"
+        
     }
     
     //detailed view of selected cell
@@ -173,15 +216,18 @@ extension MoviesMainScreenVC : UICollectionViewDelegate, UICollectionViewDelegat
         
         let detailedImageViewPage = self.storyboard?.instantiateViewController(withIdentifier: "DetailedImageViewID") as! DetailedImageViewVC
         
-        UIView.animate(withDuration: 0.8, delay: 0.0, options: .curveEaseInOut, animations: {
-            
-            self.navigationController?.pushViewController(detailedImageViewPage, animated: false)
-            UIView.setAnimationTransition(.curlUp, for: (self.navigationController?.view)!, cache: false)
-        }, completion: nil)
+        let contentCell = collectionView.cellForItem(at: indexPath) as! ContentCell
         
-        let cell = collectionView.cellForItem(at: indexPath)
-        detailedImageViewPage.imageColor = cell?.backgroundColor
+        guard let genreCell = contentCell.getTableViewCell as? GenreCell else{ return
+        }
         
+        let genreCellIndexPath = [genreCell.tag, genreCell.movieCollection.tag] as IndexPath
+        
+        
+        let url = URL(string: contentCellData[genreCellIndexPath.section][genreCellIndexPath.row][indexPath.row].webformatURL)
+        detailedImageViewPage.url = url
+        
+        self.navigationController?.pushViewController(detailedImageViewPage, animated: false)
         
     }
    
@@ -203,27 +249,21 @@ extension MoviesMainScreenVC{
         guard let tableCell = collectionCell.getTableViewCell as! GenreCell? else{ return
         }
 
-        let tableCellIndices = movieTable.indexPath(for: tableCell)
+        let tableCellIndexPath = movieTable.indexPath(for: tableCell)!
         
-        let collectionCellIndices = tableCell.movieCollection.indexPath(for: collectionCell)
+        let collectionCellIndexPath = tableCell.movieCollection.indexPath(for: collectionCell)!
         
-        let favIndexPath = [tableCellIndices!,collectionCellIndices!]
-        
-        if favButton.isSelected == true{
+        favButton.isSelected = !favButton.isSelected
+        if favButton.isSelected{
             
-            favItems.append(favIndexPath)
+            contentCellData[tableCellIndexPath.section][tableCellIndexPath.row][collectionCellIndexPath.row].isFav = true
         }
             
         else{
             
-            favItems = favItems.filter({ (indices : [IndexPath]) -> Bool in
-                return indices != favIndexPath
-            })
-            
+            contentCellData[tableCellIndexPath.section][tableCellIndexPath.row][collectionCellIndexPath.row].isFav = false
         }
         
-        
-       print(favItems)
     }
     
     //expanding the cell
@@ -232,7 +272,7 @@ extension MoviesMainScreenVC{
         guard let genreCell = expButton.getTableViewCell as? GenreCell else{ return
         }
         
-        let indexs = self.movieTable.indexPath(for: genreCell)!
+        guard let indexs = self.movieTable.indexPath(for: genreCell) else{ return }
         
         expButton.isSelected = !expButton.isSelected
         

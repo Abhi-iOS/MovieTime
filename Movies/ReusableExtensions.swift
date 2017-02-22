@@ -42,7 +42,7 @@ extension UIView{
 // random color genreator
 extension UIColor
 {
-    static var random : UIColor{
+    static func random () -> UIColor{
         
         let randomRed:CGFloat = CGFloat(drand48())
         let randomGreen:CGFloat = CGFloat(drand48())
@@ -52,4 +52,3 @@ extension UIColor
     }
     
 }
-

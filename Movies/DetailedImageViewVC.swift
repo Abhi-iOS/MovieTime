@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class DetailedImageViewVC: UIViewController {
     
     //MARK: variables
-    var imageColor: UIColor!
-    var nextPoint: CGPoint = CGPoint(x: 0, y: 0)
+    var url: URL!
+    var nextPoint = CGPoint(x: 0, y: 0)
     
     //MARK: outlets
     @IBOutlet weak var detailedImage: UIImageView!
@@ -22,28 +23,18 @@ class DetailedImageViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        detailedImage.backgroundColor = imageColor
+        detailedImage.af_setImage(withURL: url)
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(translateImage))
         self.detailedImage.addGestureRecognizer(pan)
         //detailedImage.isUserInteractionEnabled = true
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        super.viewWillDisappear(false)
-        
-        UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseInOut, animations: {
-        UIView.setAnimationTransition(.curlDown, for: self.navigationController!.view!, cache: false)
-        }, completion: nil)
-        
+        super.viewWillDisappear(animated)
+       
     }
     
     //translate image on pan

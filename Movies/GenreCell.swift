@@ -22,19 +22,12 @@ class GenreCell: UITableViewCell {
         //MARK: awakeFromNib
         super.awakeFromNib()
         // Initialization code
-        
-    }
-    
-    func configureWithData(data : [[String:Any]] , indexPath: IndexPath ){
-        
-        genreLabel.text = data[indexPath.row]["genre"] as? String
-        
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        genreLabel.text = ""
+        genreLabel.text = "Genre"
         expandCell.isSelected = false
     }
     

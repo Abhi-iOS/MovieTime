@@ -20,7 +20,8 @@
 		0C971F4D1E5585B100E22F42 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F4B1E5585B100E22F42 /* ContentCell.xib */; };
 		0C971F511E55867A00E22F42 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C971F501E55867A00E22F42 /* SectionHeader.swift */; };
 		0C971F531E559E1200E22F42 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C971F521E559E1200E22F42 /* SectionHeader.xib */; };
-		0C971F571E55C0B100E22F42 /* DataContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C971F561E55C0B100E22F42 /* DataContent.swift */; };
+		0CB289DC1E5C61C300169281 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB289DB1E5C61C300169281 /* NetworkController.swift */; };
+		0CB289DE1E5C61E500169281 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB289DD1E5C61E500169281 /* WebServices.swift */; };
 		0CF9C2271E58095700AF5DCC /* ReusableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9C2261E58095700AF5DCC /* ReusableExtensions.swift */; };
 		EEA515EA737BEBC37954F114 /* Pods_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08359D487E92B958AEA789B /* Pods_Movies.framework */; };
 /* End PBXBuildFile section */
@@ -41,7 +42,8 @@
 		0C971F4B1E5585B100E22F42 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		0C971F501E55867A00E22F42 /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		0C971F521E559E1200E22F42 /* SectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
-		0C971F561E55C0B100E22F42 /* DataContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContent.swift; sourceTree = "<group>"; };
+		0CB289DB1E5C61C300169281 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		0CB289DD1E5C61E500169281 /* WebServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0CF9C2261E58095700AF5DCC /* ReusableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableExtensions.swift; sourceTree = "<group>"; };
 		69DFFDF6658B3B9C3EC4DF7A /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
 		A08359D487E92B958AEA789B /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				0C971F321E55822700E22F42 /* AppDelegate.swift */,
-				0C971F561E55C0B100E22F42 /* DataContent.swift */,
+				0CB289DB1E5C61C300169281 /* NetworkController.swift */,
+				0CB289DD1E5C61E500169281 /* WebServices.swift */,
 				0C92A7081E5B312000A472DE /* ImagesInfoData.swift */,
 				0CF9C2261E58095700AF5DCC /* ReusableExtensions.swift */,
 				0C971F441E55846300E22F42 /* MoviesMainScreenVC.swift */,
@@ -250,9 +253,10 @@
 				0C971F481E5584DE00E22F42 /* GenreCell.swift in Sources */,
 				0C971F4C1E5585B100E22F42 /* ContentCell.swift in Sources */,
 				0C92A7091E5B312000A472DE /* ImagesInfoData.swift in Sources */,
+				0CB289DE1E5C61E500169281 /* WebServices.swift in Sources */,
 				0C8431741E57027800592004 /* DetailedImageViewVC.swift in Sources */,
 				0CF9C2271E58095700AF5DCC /* ReusableExtensions.swift in Sources */,
-				0C971F571E55C0B100E22F42 /* DataContent.swift in Sources */,
+				0CB289DC1E5C61C300169281 /* NetworkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +300,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -346,6 +351,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

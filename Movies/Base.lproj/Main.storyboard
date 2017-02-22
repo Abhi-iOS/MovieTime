@@ -41,7 +41,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="movieTable" destination="V12-ck-2Ml" id="y0N-G7-wWN"/>
+                        <outlet property="movieTable" destination="V12-ck-2Ml" id="JsD-La-kpc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDe-Yk-Lrm" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,6 +7,6 @@ target 'Movies' do
 
     #Pods for Movies
 pod 'Alamofire', '~> 4.3'
-pod 'AlamofireImage', '~> 3.1'
+pod 'AlamofireImage', '~> 3.2'
 pod 'SwiftyJSON'
 end

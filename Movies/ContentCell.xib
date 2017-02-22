@@ -18,6 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-0g-Tjf">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    </imageView>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxh-VK-ozB">
                         <rect key="frame" x="34.5" y="34.5" width="13" height="13"/>
                         <constraints>
@@ -33,15 +36,31 @@
                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7B-5B-mAq">
+                        <rect key="frame" x="4" y="8" width="42" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.9235692024230957" green="0.8146471381187439" blue="0.57240027189254761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="kdF-0g-Tjf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6Lj-SE-ql9"/>
+                <constraint firstAttribute="trailing" secondItem="kdF-0g-Tjf" secondAttribute="trailing" id="C5V-Rc-7ne"/>
+                <constraint firstItem="v7B-5B-mAq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="ERD-Pv-e4M"/>
+                <constraint firstItem="v7B-5B-mAq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="Gy1-5n-FK4"/>
+                <constraint firstAttribute="trailing" secondItem="v7B-5B-mAq" secondAttribute="trailing" constant="4" id="LXw-5k-ynV"/>
                 <constraint firstAttribute="bottom" secondItem="Fxh-VK-ozB" secondAttribute="bottom" constant="2.5" id="LZv-VF-EA4"/>
                 <constraint firstAttribute="trailing" secondItem="Fxh-VK-ozB" secondAttribute="trailing" constant="2.5" id="SKc-oS-21o"/>
+                <constraint firstItem="v7B-5B-mAq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="UHu-VZ-eag"/>
+                <constraint firstItem="kdF-0g-Tjf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZhD-xN-jpV"/>
+                <constraint firstAttribute="bottom" secondItem="kdF-0g-Tjf" secondAttribute="bottom" id="siv-Oe-ypb"/>
             </constraints>
             <connections>
                 <outlet property="addFavourties" destination="Fxh-VK-ozB" id="6st-p0-C4p"/>
+                <outlet property="dataImage" destination="kdF-0g-Tjf" id="oib-V8-WCX"/>
+                <outlet property="imageLabel" destination="v7B-5B-mAq" id="sZH-1L-cQi"/>
             </connections>
         </collectionViewCell>
     </objects>
